@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import django_heroku
+import dj_database_url
+from decouple import config 
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Website_django.urls'
@@ -125,7 +130,7 @@ STATICFILES_DIRS =[
 
     os.path.join(BASE_DIR, 'static'), #where are static files are
 ]
-
+STATICFILES_STOREAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # EMAIL_HOST = 'smpt.gmail.com'
 # EMAIL_PORT = 587
@@ -141,6 +146,8 @@ EMAIL_HOST_PASSWORD= ''
 EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
 
+
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
