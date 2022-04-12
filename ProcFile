@@ -1,1 +1,1 @@
-web: gunicorn Website_django.wsgi
+web: gunicorn --chdir Website_django Website_django.wsgi
